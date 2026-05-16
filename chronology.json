@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-05-15T18:31:04",
+  "generated_at": "2026-05-15T18:50:20",
   "posts": [
     {
-      "slug": "",
+      "slug": "lorem-ipsum",
       "title": "Lorem Ipsum",
       "category": "joy",
       "excerpt": "Filler text to ensure that it rendered correctly.",
       "published": "2026-05-15",
       "last_edited": "2026-05-15",
-      "source": "posts/Lorem-Ipsum.md",
-      "output": "dist/essays/.html"
+      "source": "posts/2026-05-15-lorem-ipsum.md",
+      "output": "dist/essays/lorem-ipsum.html"
     }
   ],
   "about": {

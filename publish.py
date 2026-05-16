@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import re
 import shutil
 import json
 import time
@@ -101,17 +102,22 @@ def main():
         shutil.rmtree(DIST)
     os.makedirs(os.path.join(DIST, "essays"))
 
-    # 2. Copy styles.css
+    # 2. Copy styles.css and suppress Jekyll
     shutil.copy(STYLES_SRC, os.path.join(DIST, STYLES_SRC))
+    open(os.path.join(DIST, ".nojekyll"), "w").close()
 
     # 3. Copy images/ if present
     if os.path.exists(IMAGES_SRC):
         shutil.copytree(IMAGES_SRC, os.path.join(DIST, "images"))
 
     # 4. Read and process posts
+    POST_PATTERN = re.compile(r'^\d{4}-\d{2}-\d{2}-(.+)\.md$')
     posts = []
     for filename in sorted(os.listdir(POSTS_DIR)):
-        if not filename.endswith(".md"):
+        match = POST_PATTERN.match(filename)
+        if not match:
+            if filename.endswith(".md"):
+                print(f"Warning: skipping {filename} (expected YYYY-MM-DD-slug.md)")
             continue
         source = os.path.join(POSTS_DIR, filename)
         with open(source, encoding="utf-8") as f:
@@ -123,8 +129,7 @@ def main():
             if field not in meta:
                 sys.exit(f"Error: '{field}' missing in frontmatter of {source}")
 
-        # Filename format: YYYY-MM-DD-slug.md — strip the 11-char date prefix
-        slug = filename[11:].removesuffix(".md")
+        slug = match.group(1)
         output_path = os.path.join(DIST, "essays", f"{slug}.html")
 
         post = {
