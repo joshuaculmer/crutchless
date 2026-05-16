@@ -18,7 +18,7 @@ TEMPLATE_FILE = "template.html"
 STYLES_SRC = "styles.css"
 IMAGES_SRC = "images"
 CHRONOLOGY_FILE = "chronology.json"
-TAGLINE = "On leaving behind old gods in favor of a better life."
+TAGLINE = "My Journey to live without entertainment addiction"
 CRUTCH_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="crutch-icon" aria-hidden="true"><g transform="rotate(-45, 12, 12)"><line x1="9" y1="3" x2="15" y2="3" /><line x1="10.75" y1="3" x2="10.75" y2="14" /><line x1="13.25" y1="3" x2="13.25" y2="14" /><line x1="10.75" y1="9" x2="13.25" y2="9" /><line x1="10.75" y1="14" x2="12" y2="16" /><line x1="13.25" y1="14" x2="12" y2="16" /><line x1="12" y1="16" x2="12" y2="20" /><line x1="11" y1="20" x2="13" y2="20" /></g></svg>'
 
 _md = markdown.Markdown(extensions=["extra", "smarty"])
