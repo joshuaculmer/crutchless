@@ -56,6 +56,21 @@ Configure Pages in repo Settings → Pages → Source: `main`, folder: `/dist`.
 
 ---
 
+## Links within posts
+
+Posts are served from `essays/`, one level below the site root. Relative links in post bodies must account for that:
+
+| Destination | Link to write |
+|---|---|
+| Another post | `[text](other-slug.html)` |
+| About page | `[text](../about.html)` |
+| Essays index | `[text](../essays/index.html)` |
+| An image | `[text](../images/filename.jpg)` |
+
+Absolute paths (starting with `/`) will break on GitHub Pages since the site is served from `/crutchless/`, not the domain root.
+
+---
+
 ## Images
 
 Drop image files into `/images/`. Reference them in markdown as `![alt](../images/filename.jpg)`.
