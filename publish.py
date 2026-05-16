@@ -19,6 +19,7 @@ STYLES_SRC = "styles.css"
 IMAGES_SRC = "images"
 CHRONOLOGY_FILE = "chronology.json"
 TAGLINE = "On leaving behind old gods in favor of a better life."
+CRUTCH_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="crutch-icon" aria-hidden="true"><g transform="rotate(-45, 12, 12)"><line x1="9" y1="3" x2="15" y2="3" /><line x1="10.75" y1="3" x2="10.75" y2="14" /><line x1="13.25" y1="3" x2="13.25" y2="14" /><line x1="10.75" y1="9" x2="13.25" y2="9" /><line x1="10.75" y1="14" x2="12" y2="16" /><line x1="13.25" y1="14" x2="12" y2="16" /><line x1="12" y1="16" x2="12" y2="20" /><line x1="11" y1="20" x2="13" y2="20" /></g></svg>'
 
 _md = markdown.Markdown(extensions=["extra", "smarty"])
 
@@ -50,18 +51,20 @@ def load_template():
         return f.read()
 
 
-def render_page(template, title, content, current=None, depth=0):
+def render_page(template, title, content, current=None, depth=0, body_class=""):
     """Inject tokens and fix absolute paths to be relative at the given depth."""
     prefix = "../" * depth
     html = (template
         .replace("{{title}}", title)
         .replace("{{content}}", content)
+        .replace("{{body_class}}", body_class)
         .replace("{{nav_essays}}", 'class="current"' if current == "essays" else "")
         .replace("{{nav_about}}", 'class="current"' if current == "about" else "")
         .replace('href="/"', f'href="{prefix}index.html"')
         .replace('href="/styles.css"', f'href="{prefix}styles.css"')
         .replace('href="/essays/"', f'href="{prefix}essays/index.html"')
         .replace('href="/about.html"', f'href="{prefix}about.html"')
+        .replace('href="/images/crutch.svg"', f'href="{prefix}images/crutch.svg"')
     )
     return html
 
@@ -174,13 +177,13 @@ def main():
 
     # 6. Build home page
     home_content = (
-        f'<p class="home-wordmark">Crutchless</p>'
+        f'<p class="home-wordmark">Crutchless{CRUTCH_SVG}</p>'
         f'<p class="home-tagline">{TAGLINE}</p>'
         f'{post_list_html(posts[:4], slug_prefix="essays/")}'
     )
     write_file(
         os.path.join(DIST, "index.html"),
-        render_page(template, "Crutchless", home_content, depth=0),
+        render_page(template, "Crutchless", home_content, depth=0, body_class="home"),
     )
 
     # 7. Build essays index

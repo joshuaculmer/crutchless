@@ -50,7 +50,18 @@ footer nav {
 
 /* Wordmark */
 
+.home header {
+  justify-content: flex-end;
+}
+
+.home header .wordmark {
+  display: none;
+}
+
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
   font-size: 1.25rem;
   font-weight: bold;
@@ -61,6 +72,14 @@ footer nav {
 
 .wordmark:hover {
   color: #141c16;
+}
+
+/* Crutch icon */
+
+.crutch-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
 }
 
 /* Nav */
@@ -155,6 +174,9 @@ hr {
 /* Home page */
 
 .home-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
   font-size: 4.5rem;
   font-weight: bold;
